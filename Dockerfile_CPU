@@ -1,0 +1,26 @@
+FROM python:3.8-slim
+
+EXPOSE 5000
+
+LABEL Description="HTTP service to extract and compare embeddings" \
+      Vendor="pimezon" \
+      Maintainer="taransanya@pi-mezon.ru"
+
+WORKDIR /usr/local/bin
+
+RUN apt-get update && apt-get install -y locales && rm -rf /var/lib/apt/lists/* \
+    && localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+
+# Enable unicode support
+ENV LANG en_US.UTF-8
+
+COPY /fastapi /usr/local/bin
+
+# Install dependencies
+RUN apt-get update && \
+    apt-get install libglib2.0-0 libgl1-mesa-dev curl -y && \
+    pip3 install --upgrade pip && \
+    pip3 install --no-cache-dir -r /usr/local/bin/requirements-cpu.txt && \
+    pip3 install --no-cache-dir torch==1.12.0+cpu torchvision==0.13.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
+
+ENTRYPOINT ["python", "/usr/local/bin/httpsrv.py"]
