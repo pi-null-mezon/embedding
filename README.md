@@ -9,7 +9,7 @@ HTTP service to extract and compare embeddings
 docker build -t pimezon/embedding -f Dockerfile_CPU .
 ```
 
-or for CUDA acelerated version:
+or for CUDA accelerated version:
 
 ```
 docker build -t pimezon/embedding -f Dockerfile_CUDA .
