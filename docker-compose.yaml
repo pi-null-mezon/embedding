@@ -3,7 +3,7 @@ version: "3.9"
 services:
 
   pimezon-photo-embedding:
-    image: pimezon/embedding:latest
+    image: pimezon/embedding:cuda
     environment:
       - WORKERS=1
     ports:

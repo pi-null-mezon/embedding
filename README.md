@@ -12,7 +12,7 @@ docker build -t pimezon/embedding -f Dockerfile_CPU .
 or for CUDA acelerated version:
 
 ```
-docker build -t pimezon/embedding -f .
+docker build -t pimezon/embedding -f Dockerfile_CUDA .
 ```
 
 ## Run composition
