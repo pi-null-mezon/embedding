@@ -9,14 +9,14 @@ weights_path = "./weights" if os.path.exists("./weights") else "../weights"
 
 
 def crop_rect_from_center(img):
-    width = img.shape[0]
-    height = img.shape[1]
-    if width >= height:
-        diff = (width - height) // 2
-        return img[diff:(height + diff), 0:height]
+    rows = img.shape[0]
+    cols = img.shape[1]
+    if rows >= cols:
+        diff = (rows - cols) // 2
+        return img[diff:(rows + diff), 0:cols]
     else:
-        diff = (height - width) // 2
-        return img[0:width, diff:(width + diff)]
+        diff = (cols - rows) // 2
+        return img[0:rows, diff:(cols + diff)]
 
 
 class PhotoEmbedder:
