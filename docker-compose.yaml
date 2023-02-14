@@ -20,7 +20,7 @@ services:
         max_attempts: 3
     healthcheck:
           test: "curl --fail http://localhost:5000/healthcheck || exit 1"
-          interval: 60s
+          interval: 300s
           retries: 3
           start_period: 45s
           timeout: 5s

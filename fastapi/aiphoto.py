@@ -8,15 +8,16 @@ os.environ['TORCH_HOME'] = '../weights'
 weights_path = "./weights" if os.path.exists("./weights") else "../weights"
 
 
-def crop_rect_from_center(img):
+def crop_central_rect(img, target_size):
     rows = img.shape[0]
     cols = img.shape[1]
     if rows >= cols:
         diff = (rows - cols) // 2
-        return img[diff:(rows + diff), 0:cols]
+        crop = img[diff:(cols + diff), 0:cols]
     else:
         diff = (cols - rows) // 2
-        return img[0:rows, diff:(cols + diff)]
+        crop = img[0:rows, diff:(rows + diff)]
+    return cv2.resize(crop, target_size)
 
 
 class PhotoEmbedder:
@@ -39,7 +40,8 @@ class PhotoEmbedder:
         self.model = None
 
     def photo2tensor(self, cv_bgr_img, target_size):
-        crop = cv2.resize(crop_rect_from_center(cv_bgr_img), target_size)
+        #crop = crop_central_rect(cv_bgr_img, target_size)
+        crop = cv2.resize(cv_bgr_img, target_size)
         # cv2.imshow("probe", crop)
         # cv2.waitKey(0)
         crop = cv2.cvtColor(crop, cv2.COLOR_BGR2RGB)

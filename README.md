@@ -1,7 +1,7 @@
 embedding
 ===
 
-HTTP service to extract and compare NN embeddings
+HTTP service to extract and compare embeddings
 
 ## Build docker image:
 
